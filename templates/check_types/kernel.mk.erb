@@ -1,0 +1,5 @@
+checks += [
+<%- items.each do |key_1,value_1| -%>
+  ("<%= scope.lookupvar('hostname') %>","kernel","<%= key_1 %>",(<%= value_1['warning'] %>, <%= value_1['critical'] %>)),
+<%- end -%>
+]
