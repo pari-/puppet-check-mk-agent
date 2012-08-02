@@ -21,6 +21,12 @@ class check_mk_agent::params {
       $service_name = 'xinetd'
       $config_dir = '/etc/check_mk/conf.d'
     }
+    'CentOS': {
+      $package = [ 'check_mk-agent', 'xinetd' ]
+      $config = '/etc/xinetd.d/check_mk'
+      $service_name = 'xinetd'
+      $config_dir = '/etc/check_mk/conf.d'
+    }
     default: {
       fail("\"${module_name}\" is not supported on \"${::operatingsystem}\"")
     }
