@@ -4,13 +4,21 @@ class check_mk_agent::package {
       true  => 'latest',
       false => 'installed',
     }
-  } else {
-    $package_ensure = 'purged'
-  }
-
-  package {$check_mk_agent::package:
-    ensure          => $package_ensure,
-    provider        => 'aptbpo',
-    install_options => { '-t' => 'squeeze-backports' },
-  }
+    } else {
+      $package_ensure = 'purged'
+    }
+    case $::operatingsystem {
+      'Debian': {
+        package {$check_mk_agent::package:
+          ensure          => $package_ensure,
+          provider        => 'aptbpo',
+          install_options => { '-t' => 'squeeze-backports' },
+        }
+      }
+      'CentOS': {
+        package {$check_mk_agent::package:
+          ensure => $package_ensure,
+        }
+      }
+    }
 }

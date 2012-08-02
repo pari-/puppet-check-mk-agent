@@ -1,5 +1,5 @@
 class check_mk_agent::config {
-  file {$check_mk_agent::config:
+  file {"${check_mk_agent::config}":
     ensure  => 'present',
     content => template('check_mk_agent/check_mk.erb'),
   }
